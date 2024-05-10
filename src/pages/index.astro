@@ -1,0 +1,81 @@
+---
+import allTweets from "../../data/allTweets.json";
+import Profile from "../components/Profile.astro";
+import Tweet from "../components/Tweet.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>frank ocean on Twitter</title>
+  </head>
+  <body>
+    <div class="container">
+      <Profile
+        displayName="frank ocean"
+        username="frank_ocean"
+        avatarUrl="/pfp.jpg"
+        bio="i don't know anything. & neither do you."
+        location="(29.988587,-90.0620075)"
+        website="http://frankocean.tumblr.com"
+        verified
+      />
+      <div class="tweet-list">
+        {
+          allTweets.map(([id, content]) => (
+            <Tweet id={id} content={content} displayName="frank ocean" username="frank_ocean" avatarUrl="/pfp.jpg" />
+          ))
+        }
+      </div>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    color: #009999;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<style>
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  html {
+    font-family: "Arial", sans-serif;
+  }
+
+  body {
+    background-color: black;
+    background-image: url(/bg.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+  }
+
+  .container {
+    padding: 14px;
+  }
+
+  .tweet-list {
+    width: 600px;
+    border-radius: 6px;
+    background-color: white;
+    margin: auto;
+  }
+</style>

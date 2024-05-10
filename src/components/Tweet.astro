@@ -1,0 +1,76 @@
+---
+import { estimateTweetTime } from "../lib/convert";
+
+interface Props {
+  id: string;
+  content: string;
+  avatarUrl: string;
+  displayName: string;
+  username: string;
+}
+
+const { id, content, avatarUrl, displayName, username } = Astro.props;
+
+const time = estimateTweetTime(Number(id));
+const timeShort = time.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+const timeFull = time.toLocaleString();
+---
+
+<div class="tweet">
+  <img src={avatarUrl} alt={displayName} class="avatar" width="48" height="48" />
+  <div class="content">
+    <div class="header">
+      <span class="time" title={timeFull}>{timeShort}</span>
+      <span class="displayName">{displayName}</span>
+      <span class="username"><span class="at">@</span>{username}</span>
+    </div>
+    <div class="text">
+      {content}
+    </div>
+  </div>
+</div>
+
+<style>
+  .tweet {
+    padding: 9px 12px;
+    font-size: 14px;
+    display: flex;
+  }
+
+  .tweet:not(:last-child) {
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .avatar {
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+
+  .content,
+  .header {
+    width: 100%;
+  }
+
+  .displayName {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .at {
+    color: #bbb;
+  }
+
+  .username,
+  .time {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .time {
+    float: right;
+  }
+
+  .text {
+    color: #333;
+  }
+</style>

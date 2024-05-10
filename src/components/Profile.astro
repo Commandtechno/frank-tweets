@@ -1,0 +1,90 @@
+---
+interface Props {
+  avatarUrl: string;
+  displayName: string;
+  username: string;
+  bio: string;
+  location: string;
+  website: string;
+  verified?: boolean;
+}
+
+const { avatarUrl, displayName, username, bio, location, website, verified } = Astro.props;
+---
+
+<div class="profile">
+  <img src={avatarUrl} alt={displayName} class="avatar" width="128" height="128" />
+  <div class="content">
+    <h1>
+      {displayName}
+      {verified && <img src="/verified.svg" alt="Verified" class="verified" width="22" height="22" />}
+    </h1>
+    <h2><span class="at">@</span>{username}</h2>
+    <p class="bio">{bio}</p>
+    <p class="location-and-url">{location} · <a href={website}>{website}</a></p>
+  </div>
+</div>
+
+<style>
+  .profile {
+    width: 600px;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: white;
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .avatar {
+    border-radius: 6px;
+  }
+
+  .content {
+    margin-left: 12px;
+  }
+
+  h1 {
+    color: #333;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 2px;
+    line-height: 1;
+  }
+
+  .verified {
+    vertical-align: text-top;
+    margin-top: 7px;
+  }
+
+  h2 {
+    color: #777;
+    font-weight: normal;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1px;
+    color: #777;
+    line-height: 24px;
+  }
+
+  .at {
+    color: #bbb;
+  }
+
+  .bio {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #777;
+    margin: 0;
+  }
+
+  .location-and-url {
+    font-size: 12px;
+    line-height: 18px;
+    color: #777;
+    margin: 0;
+  }
+</style>
